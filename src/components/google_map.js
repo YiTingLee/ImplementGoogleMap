@@ -1,4 +1,5 @@
 import  React,{Component} from "react";
+import {connect} from 'react-redux';
 
 import {withGoogleMap,GoogleMap} from "react-google-maps";
 
@@ -8,16 +9,19 @@ import {withGoogleMap,GoogleMap} from "react-google-maps";
 const SimpleMapExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
     defaultZoom={12}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultCenter={{ lat: props.lat, lng: props.lng}}
   />
 ));
 
 /*
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-export default class SimpleMapExample extends Component {
+class SimpleMapExample extends Component {
 
   render() {
+    console.log(this.props.lat);
+    if(!this.props.lat)
+      return<div>Loading..</div>
     return (
       <SimpleMapExampleGoogleMap
         containerElement={
@@ -26,7 +30,16 @@ export default class SimpleMapExample extends Component {
         mapElement={
            <div style={{height: '100%', width: '100%'}} />
         }
+        lat = {this.props.lat}
+        lng = {this.props.lng}
       />
     );
   }
 }
+
+// function mapStateToProps(state){
+//   return {latlng : state.lat};
+// }
+//
+// export default connect (mapStateToProps)(SimpleMapExample);
+export default SimpleMapExample;
