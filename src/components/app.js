@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SimpleMapExample from './google_map';
+import SimpleMapExample from '../containers/google_map';
 import SelectBar from '../containers/select_bar';
 
 
