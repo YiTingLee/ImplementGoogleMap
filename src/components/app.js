@@ -25,7 +25,9 @@ export default class App extends Component {
       <div>
         <div>lat={this.state.lat}</div>
         <div>lng={this.state.lon}</div>
-        <SimpleMapExample />
+        <div className="map">
+          <SimpleMapExample />
+        </div>
         END
       </div>
     );
