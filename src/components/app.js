@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SimpleMapExample from './google_map';
+import SelectBar from '../containers/select_bar';
 
 
 
@@ -25,6 +26,9 @@ export default class App extends Component {
       <div>
         <div>lat={this.state.lat}</div>
         <div>lng={this.state.lon}</div>
+        <div>
+          <SelectBar />
+        </div>
         <div className="map">
           <SimpleMapExample lat={this.state.lat} lng={this.state.lon} />
         </div>
