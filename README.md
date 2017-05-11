@@ -1,10 +1,10 @@
-# ImplementGoogleMap
-
-Use
-
-> git clone https://github.com/StephenGrider/ReduxSimpleStarter.git
-> cd ReduxSimpleStarter
-> npm install
-> npm start
-
-End
+# ImplementGoogleMap </br>
+</br>
+Use </br>
+</br>
+> git clone https://github.com/YiTingLee/ImplementGoogleMap.git </br>
+> cd ImplementGoogleMap </br>
+> npm install </br>
+> npm start </br>
+</br>
+End </br>
