@@ -2,7 +2,7 @@ import  React,{Component} from "react";
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import {withGoogleMap,GoogleMap} from "react-google-maps";
-import myMarker from '../components/marker';
+import TaxiMarker from '../components/marker';
 
 /*
  * Sample From: https://developers.google.com/maps/documentation/javascript/examples/map-simple
@@ -21,27 +21,28 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
  */
 class SimpleMapExample extends Component {
 
-  renderMarkers(){
-    return _.map(this.props.taxiInfo,(driver) => {
-      console.log("DriverMapping:",driver);
-      return(
-        <myMarker
-          key = {driver.DriverId}
-          lat = {driver.latitude}
-          lng = {driver.longitude}
-        />
-      );
-    });
-  }
-
   // renderMarkers(){
-  //   return (
-  //       <myMarker
-  //         lat = {-34.397}
-  //         lng = {150.644}
+  //   console.log(this.props.taxiInfo);
+  //   return _.map(this.props.taxiInfo,(driver,index) => {
+  //     console.log("DriverMapping:",driver);
+  //     return(
+  //       <TaxiMarker
+  //         key = {driver.DriverId}
+  //         lat = {driver.latitude}
+  //         lng = {driver.longitude}
   //       />
-  //   );
+  //     );
+  //   });
   // }
+
+  renderMarkers(){
+    return (
+        <TaxiMarker
+          lat = {25.0429295}
+          lng = {121.53574649999999}
+        />
+    );
+  }
 
   render() {
     console.log("TaxiInfo:",this.props.taxiInfo);
