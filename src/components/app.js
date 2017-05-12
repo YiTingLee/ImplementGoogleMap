@@ -14,7 +14,7 @@ export default class App extends Component {
       this.setState({lat:success.coords.latitude,lon:success.coords.longitude});
       // console.log(this.state);
     }, (error) =>{
-      console.log("Your browser doesn't support geolocation.");
+      console.log("Your browser doesn't support geolocation.",error);
     });
 
 
