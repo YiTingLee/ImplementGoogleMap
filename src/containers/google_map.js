@@ -19,7 +19,7 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
 class SimpleMapExample extends Component {
 
   render() {
-    console.log(this.props.lat);
+    console.log("TaxiInfo:",this.props.taxiInfo);
     if(!this.props.lat)
       return<div>Loading..</div>
     return (
@@ -37,9 +37,8 @@ class SimpleMapExample extends Component {
   }
 }
 
-// function mapStateToProps(state){
-//   return {latlng : state.lat};
-// }
-//
-// export default connect (mapStateToProps)(SimpleMapExample);
-export default SimpleMapExample;
+function mapStateToProps(state){
+  return {taxiInfo : state.taxiInfo};
+}
+
+export default connect(mapStateToProps)(SimpleMapExample);
