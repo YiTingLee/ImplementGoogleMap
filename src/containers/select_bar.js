@@ -5,12 +5,12 @@ import {connect} from 'react-redux';
 class SelectBar extends Component{
   constructor(props){
     super(props);
-    console.log("this:",this);
+    // console.log("this:",this);
     this.onSelectChange = this.onSelectChange.bind(this);
   }
 
   onSelectChange(event){
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.props.fetchTaxiLocation(event.target.value);
   }
 
