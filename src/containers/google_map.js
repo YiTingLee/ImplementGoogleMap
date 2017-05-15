@@ -21,28 +21,27 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
  */
 class SimpleMapExample extends Component {
 
-  // renderMarkers(){
-  //   console.log(this.props.taxiInfo);
-  //   return _.map(this.props.taxiInfo,(driver,index) => {
-  //     console.log("DriverMapping:",driver);
-  //     return(
-  //       <TaxiMarker
-  //         key = {driver.DriverId}
-  //         lat = {driver.latitude}
-  //         lng = {driver.longitude}
-  //       />
-  //     );
-  //   });
-  // }
-
   renderMarkers(){
-    return (
+    return _.map(this.props.taxiInfo,(driver) => {
+      // console.log("DriverMapping:",driver);
+      return(
         <TaxiMarker
-          lat = {25.0429295}
-          lng = {121.53574649999999}
+          key = {driver.DriverId}
+          lat = {driver.latitude}
+          lng = {driver.longitude}
         />
-    );
+      );
+    });
   }
+
+  // renderMarkers(){
+  //   return (
+  //       <TaxiMarker
+  //         lat = {25.0429295}
+  //         lng = {121.53574649999999}
+  //       />
+  //   );
+  // }
 
   render() {
     console.log("TaxiInfo:",this.props.taxiInfo);
@@ -65,7 +64,7 @@ class SimpleMapExample extends Component {
 }
 
 function mapStateToProps(state){
-  return {taxiInfo : state.taxiInfo};
+  return {taxiInfo : state.taxiInfo.taxiInfo};
 }
 
 export default connect(mapStateToProps)(SimpleMapExample);
