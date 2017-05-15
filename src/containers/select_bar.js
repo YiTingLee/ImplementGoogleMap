@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {fetchTaxiLocation} from '../actions/index';
+import {fetchDirecions} from '../actions/index';
 import {connect} from 'react-redux';
 
 class SelectBar extends Component{
@@ -12,6 +13,7 @@ class SelectBar extends Component{
   onSelectChange(event){
     // console.log(event.target.value);
     this.props.fetchTaxiLocation(event.target.value);
+    this.props.fetchDirecions(this.props.lat,this.props.lng,event.target.value)
   }
 
   render(){
@@ -25,4 +27,4 @@ class SelectBar extends Component{
   }
 }
 
-export default connect(null,{fetchTaxiLocation})(SelectBar);
+export default connect(null,{fetchTaxiLocation,fetchDirecions})(SelectBar);

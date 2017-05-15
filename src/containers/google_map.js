@@ -1,7 +1,7 @@
 import  React,{Component} from "react";
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import {withGoogleMap,GoogleMap} from "react-google-maps";
+import {withGoogleMap,GoogleMap,DirectionsRenderer} from "react-google-maps";
 import TaxiMarker from '../components/marker';
 
 /*
@@ -13,6 +13,7 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
     defaultCenter={{ lat: props.lat, lng: props.lng}}
   >
     {props.markers}
+    {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
 ));
 
@@ -20,6 +21,13 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
 class SimpleMapExample extends Component {
+
+  state = {
+    origin: new google.maps.LatLng(41.8507300, -87.6512600),
+    destination: new google.maps.LatLng(41.8525800, -87.6514100),
+    directions: null,
+  }
+
 
   renderMarkers(){
     return _.map(this.props.taxiInfo,(driver) => {
@@ -43,6 +51,25 @@ class SimpleMapExample extends Component {
   //   );
   // }
 
+  componentDidMount() {
+    const DirectionsService = new google.maps.DirectionsService();
+
+
+    DirectionsService.route({
+      origin: new google.maps.LatLng(this.props.lat, this.props.lng),
+      destination: new google.maps.LatLng(25.047908, 121.517315),
+      travelMode: google.maps.TravelMode.DRIVING,
+    }, (result, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        this.setState({
+          directions: result,
+        });
+      } else {
+        // console.error(`error fetching directions ${result}`);
+      }
+    });
+  }
+
   render() {
     console.log("TaxiInfo:",this.props.taxiInfo);
     if(!this.props.lat)
@@ -58,6 +85,7 @@ class SimpleMapExample extends Component {
         lat = {this.props.lat}
         lng = {this.props.lng}
         markers = {this.renderMarkers()}
+        directions={this.state.directions}
       />
     );
   }
