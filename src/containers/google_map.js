@@ -38,11 +38,11 @@ class SimpleMapExample extends Component {
   render() {
     // console.log("TaxiInfo:",this.props.taxiInfo);
     console.log("Connect Route:",this.props.route);
-    // if(!this.props.lat || !this.props.route)
+
     if(!this.props.lat)
       return<div>Loading..</div>
-    // if(!this.props.route){
-  return (
+
+    return (
       <SimpleMapExampleGoogleMap
         containerElement={
            <div style={{height: '100%', width: '100%'}} />
