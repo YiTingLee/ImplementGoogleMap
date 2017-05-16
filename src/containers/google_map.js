@@ -35,51 +35,27 @@ class SimpleMapExample extends Component {
     });
   }
 
-  // renderMarkers(){
-  //   return (
-  //       <TaxiMarker
-  //         lat = {25.0429295}
-  //         lng = {121.53574649999999}
-  //       />
-  //   );
-  // }
-
   render() {
     // console.log("TaxiInfo:",this.props.taxiInfo);
     console.log("Connect Route:",this.props.route);
     // if(!this.props.lat || !this.props.route)
     if(!this.props.lat)
       return<div>Loading..</div>
-    if(!this.props.route){
-      return (
-        <SimpleMapExampleGoogleMap
-          containerElement={
-             <div style={{height: '100%', width: '100%'}} />
-          }
-          mapElement={
-             <div style={{height: '100%', width: '100%'}} />
-          }
-          lat = {this.props.lat}
-          lng = {this.props.lng}
-          markers = {this.renderMarkers()}
-        />
-      );
-    }else{
-      return (
-        <SimpleMapExampleGoogleMap
-          containerElement={
-             <div style={{height: '100%', width: '100%'}} />
-          }
-          mapElement={
-             <div style={{height: '100%', width: '100%'}} />
-          }
-          lat = {this.props.lat}
-          lng = {this.props.lng}
-          markers = {this.renderMarkers()}
-          directions={this.props.route}
-        />
-      );
-    }
+    // if(!this.props.route){
+  return (
+      <SimpleMapExampleGoogleMap
+        containerElement={
+           <div style={{height: '100%', width: '100%'}} />
+        }
+        mapElement={
+           <div style={{height: '100%', width: '100%'}} />
+        }
+        lat = {this.props.lat}
+        lng = {this.props.lng}
+        markers = {this.renderMarkers()}
+        directions={!this.props.route?null:this.props.route}
+      />
+    );
   }
 }
 
