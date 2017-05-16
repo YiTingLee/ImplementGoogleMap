@@ -1,7 +1,7 @@
 import  React,{Component} from "react";
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import {withGoogleMap,GoogleMap} from "react-google-maps";
+import {withGoogleMap,GoogleMap,DirectionsRenderer} from "react-google-maps";
 import TaxiMarker from '../components/marker';
 
 /*
@@ -13,6 +13,7 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
     defaultCenter={{ lat: props.lat, lng: props.lng}}
   >
     {props.markers}
+    {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
 ));
 
@@ -44,27 +45,46 @@ class SimpleMapExample extends Component {
   // }
 
   render() {
-    console.log("TaxiInfo:",this.props.taxiInfo);
+    // console.log("TaxiInfo:",this.props.taxiInfo);
+    console.log("Connect Route:",this.props.route);
+    // if(!this.props.lat || !this.props.route)
     if(!this.props.lat)
       return<div>Loading..</div>
-    return (
-      <SimpleMapExampleGoogleMap
-        containerElement={
-           <div style={{height: '100%', width: '100%'}} />
-        }
-        mapElement={
-           <div style={{height: '100%', width: '100%'}} />
-        }
-        lat = {this.props.lat}
-        lng = {this.props.lng}
-        markers = {this.renderMarkers()}
-      />
-    );
+    if(!this.props.route){
+      return (
+        <SimpleMapExampleGoogleMap
+          containerElement={
+             <div style={{height: '100%', width: '100%'}} />
+          }
+          mapElement={
+             <div style={{height: '100%', width: '100%'}} />
+          }
+          lat = {this.props.lat}
+          lng = {this.props.lng}
+          markers = {this.renderMarkers()}
+        />
+      );
+    }else{
+      return (
+        <SimpleMapExampleGoogleMap
+          containerElement={
+             <div style={{height: '100%', width: '100%'}} />
+          }
+          mapElement={
+             <div style={{height: '100%', width: '100%'}} />
+          }
+          lat = {this.props.lat}
+          lng = {this.props.lng}
+          markers = {this.renderMarkers()}
+          directions={this.props.route}
+        />
+      );
+    }
   }
 }
 
 function mapStateToProps(state){
-  return {taxiInfo : state.taxiInfo.taxiInfo};
+  return {taxiInfo : state.taxiInfo.taxiInfo,route : state.directions.directions};
 }
 
 export default connect(mapStateToProps)(SimpleMapExample);

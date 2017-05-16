@@ -25,47 +25,10 @@ export function fetchTaxiLocation(locationName){
   };
 }
 
-export function fetchDirecions(dlat,dlng,locationName){
-  var directions;
-  var olat,olng;
-
-  switch (locationName) {
-   case "ntut":
-      olat=25.042171;
-      olng=121.535507;
-      break;
-    case "station":
-       olat=25.048080;
-       olng=121.517054;
-       break;
-    case "taipei101":
-       olat=25.034234;
-       olng=121.564510;
-       break;
-     default:
-
-   }
-
-   const DirectionsService = new google.maps.DirectionsService();
-
-
-   DirectionsService.route({
-     origin: new google.maps.LatLng(dlat, dlng),
-     destination: new google.maps.LatLng(olat, olng),
-     travelMode: google.maps.TravelMode.DRIVING,
-   }, (result, status) => {
-     if (status === google.maps.DirectionsStatus.OK) {
-       console.log("result:",result);
-       directions = result;
-     } else {
-       console.error(`error fetching directions.`);
-     }
-   });
- 
-   console.log("direcions:",directions);
-
+export function fetchDirecions(result){
+  // console.log("action directions:",result);
    return {
      type:FEATCH_DIRECTIONS,
-     payload:directions
+     payload:result
   };
  }
