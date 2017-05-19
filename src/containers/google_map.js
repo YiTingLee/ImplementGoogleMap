@@ -42,38 +42,13 @@ class SimpleMapExample extends Component {
     });
   }
 
-  // renderMarkers(){
-  //   return (
-  //       <TaxiMarker
-  //         lat = {25.0429295}
-  //         lng = {121.53574649999999}
-  //       />
-  //   );
-  // }
-
-  componentDidMount() {
-    const DirectionsService = new google.maps.DirectionsService();
-
-
-    DirectionsService.route({
-      origin: new google.maps.LatLng(this.props.lat, this.props.lng),
-      destination: new google.maps.LatLng(25.047908, 121.517315),
-      travelMode: google.maps.TravelMode.DRIVING,
-    }, (result, status) => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        this.setState({
-          directions: result,
-        });
-      } else {
-        // console.error(`error fetching directions ${result}`);
-      }
-    });
-  }
-
   render() {
-    console.log("TaxiInfo:",this.props.taxiInfo);
+    // console.log("TaxiInfo:",this.props.taxiInfo);
+    console.log("Connect Route:",this.props.route);
+
     if(!this.props.lat)
       return<div>Loading..</div>
+
     return (
       <SimpleMapExampleGoogleMap
         containerElement={
@@ -85,14 +60,14 @@ class SimpleMapExample extends Component {
         lat = {this.props.lat}
         lng = {this.props.lng}
         markers = {this.renderMarkers()}
-        directions={this.state.directions}
+        directions={!this.props.route?null:this.props.route}
       />
     );
   }
 }
 
 function mapStateToProps(state){
-  return {taxiInfo : state.taxiInfo.taxiInfo};
+  return {taxiInfo : state.taxiInfo.taxiInfo,route : state.directions.directions};
 }
 
 export default connect(mapStateToProps)(SimpleMapExample);
