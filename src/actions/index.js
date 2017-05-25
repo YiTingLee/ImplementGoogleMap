@@ -25,11 +25,33 @@ export function fetchTaxiLocation(locationName){
   };
 }
 
-export function fetchDirecions(result){
+export function fetchDirecions(dlat,dlng,olat,olng){
   // console.log("action directions:",result);
-   return {
-     type:FEATCH_DIRECTIONS,
-     payload:result
-  };
+
+  const DirectionsService = new google.maps.DirectionsService();
+
+  return new Promise((resolve,reject)=> {
+    DirectionsService.route({
+       origin: new google.maps.LatLng(dlat,dlng),
+       destination: new google.maps.LatLng(olat, olng),
+       travelMode: google.maps.TravelMode.DRIVING,
+    }, (result, status) => {
+       if (status === google.maps.DirectionsStatus.OK) {
+        resolve(result);
+       } else {
+         console.error(`error fetching directions.`);
+         reject();
+       }
+     });  
+  })
+    .then(result => {
+      return{
+        type:FEATCH_DIRECTIONS,
+        payload:result
+      };
+    })
+    .catch(()=>{
+      console.log("Error Fetch");
+    });
  }
 

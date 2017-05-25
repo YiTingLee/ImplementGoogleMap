@@ -32,21 +32,8 @@ class SelectBar extends Component{
 
      }
 
-     const DirectionsService = new google.maps.DirectionsService();
+    this.props.fetchDirecions(this.props.lat,this.props.lng,olat,olng);
 
-
-     DirectionsService.route({
-       origin: new google.maps.LatLng(this.props.lat,this.props.lng,),
-       destination: new google.maps.LatLng(olat, olng),
-       travelMode: google.maps.TravelMode.DRIVING,
-     }, (result, status) => {
-       if (status === google.maps.DirectionsStatus.OK) {
-        //  console.log("result:",result);
-         this.props.fetchDirecions(result);
-       } else {
-         console.error(`error fetching directions.`);
-       }
-     });
   }
 
   render(){
