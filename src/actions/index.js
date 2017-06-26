@@ -42,7 +42,7 @@ export function fetchDirecions(dlat,dlng,olat,olng){
          console.error(`error fetching directions.`);
          reject();
        }
-     });  
+     });
   })
     .then(result => {
       return{
