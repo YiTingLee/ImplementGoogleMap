@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import SimpleMapExample from '../containers/google_map';
 import SelectBar from '../containers/select_bar';
+import {fetchUsersData} from '../actions/index';
+import {connect} from 'react-redux';
 
 
 
-export default class App extends Component {
+class App extends Component {
   constructor(props){
     super(props);
 
@@ -16,6 +18,8 @@ export default class App extends Component {
     }, (error) =>{
       console.log("Your browser doesn't support geolocation.",error);
     });
+
+    this.props.fetchUsersData();
 
 
   }
@@ -37,3 +41,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(null, {fetchUsersData})(App);

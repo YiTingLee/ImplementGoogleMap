@@ -13,6 +13,7 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
     defaultCenter={{ lat: props.lat, lng: props.lng}}
   >
     {props.markers}
+    {props.usermarkers}
     {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
 ));
@@ -35,11 +36,31 @@ class SimpleMapExample extends Component {
       return(
         <TaxiMarker
           key = {driver.DriverId}
+          name = {driver.DriverName}
           lat = {driver.latitude}
           lng = {driver.longitude}
+          flag = {1}
         />
       );
     });
+  }
+
+  renderUserMarkers(){
+    try{
+      return this.props.users.usersdata.data.map((data)=>{
+        return(
+          <TaxiMarker
+            key = {data.id}
+            name = {data.name}
+            lat = {data.lat}
+            lng = {data.lng}
+            flag = {2}
+          />
+        );
+      });
+    }catch(err){
+      // console.log("err:", err);
+    }
   }
 
   render() {
@@ -60,6 +81,7 @@ class SimpleMapExample extends Component {
         lat = {this.props.lat}
         lng = {this.props.lng}
         markers = {this.renderMarkers()}
+        usermarkers = {this.renderUserMarkers()}
         directions={!this.props.route?null:this.props.route}
       />
     );
@@ -67,7 +89,7 @@ class SimpleMapExample extends Component {
 }
 
 function mapStateToProps(state){
-  return {taxiInfo : state.taxiInfo.taxiInfo,route : state.directions.directions};
+  return {taxiInfo : state.taxiInfo.taxiInfo,route : state.directions.directions, users : state.usersdata};
 }
 
 export default connect(mapStateToProps)(SimpleMapExample);

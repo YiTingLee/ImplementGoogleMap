@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {fetchTaxiLocation} from '../actions/index';
 import {fetchDirecions} from '../actions/index';
+import {fetchUsersData} from '../actions/index';
 import {connect} from 'react-redux';
 
 class SelectBar extends Component{
@@ -31,7 +32,6 @@ class SelectBar extends Component{
        default:
 
      }
-
     this.props.fetchDirecions(this.props.lat,this.props.lng,olat,olng);
 
   }

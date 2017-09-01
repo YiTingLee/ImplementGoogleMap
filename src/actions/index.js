@@ -1,8 +1,10 @@
 import {driversLocation} from '../data/sample_drivers_location';
 import {DirectionsRenderer} from "react-google-maps";
+import axios from 'axios';
 
-export const FEATCH_TAXI_LOCATION = 'featch_taxi_location';
-export const FEATCH_DIRECTIONS = 'featch_directions';
+export const FETCH_TAXI_LOCATION = 'fetch_taxi_location';
+export const FETCH_DIRECTIONS = 'fetch_directions';
+export const FETCH_USERS_DATA = 'fetch_users_data';
 
 export function fetchTaxiLocation(locationName){
   var taxiInfo;
@@ -20,7 +22,7 @@ export function fetchTaxiLocation(locationName){
       taxiInfo = driversLocation.error;
   }
   return {
-    type:FEATCH_TAXI_LOCATION,
+    type:FETCH_TAXI_LOCATION,
     payload:taxiInfo
   };
 }
@@ -46,7 +48,7 @@ export function fetchDirecions(dlat,dlng,olat,olng){
   })
     .then(result => {
       return{
-        type:FEATCH_DIRECTIONS,
+        type:FETCH_DIRECTIONS,
         payload:result
       };
     })
@@ -55,3 +57,19 @@ export function fetchDirecions(dlat,dlng,olat,olng){
     });
  }
 
+export function fetchUsersData(){
+  // const url = `http://taxiapi.dev:3000/main/users/api/getdata`;
+  const url = `http://localhost:3000/taxiRESTfulAPI/public/main/users/api/getdata`;
+  const users_data = axios.get(url);
+  console.log('axios:', users_data);
+
+  return {
+    type:FETCH_USERS_DATA,
+    payload:users_data
+  }
+  // return new Promise((resolve, reject)=>{
+  //   const url = `http://taxiapi.dev:3000/main/users/api/getdata`;
+  //   const users_data = axios.get(url);
+  //   resolve(users_data);
+  // })
+}
