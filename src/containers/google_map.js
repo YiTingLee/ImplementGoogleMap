@@ -37,6 +37,7 @@ class SimpleMapExample extends Component {
           <TaxiMarker
             key = {data.id}
             name = {data.name}
+            car_id = {data.car_id}
             lat = {data.lat}
             lng = {data.lng}
             flag = {1}

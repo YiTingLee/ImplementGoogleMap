@@ -17,7 +17,8 @@ export default class TaxiMarker extends Component{
         >
           <div>
             <img height="30" width="30" src={`/src/data/taxiIcon.png`} />
-            <div>Driver</div>
+            <div>{this.props.name}</div>
+            <div>{this.props.car_id}</div>
           </div>
         </OverlayView>
       );
@@ -29,7 +30,7 @@ export default class TaxiMarker extends Component{
         >
           <div>
             <img height="30" width="30" src={`/src/data/userIcon.png`} />
-            <div>User</div>
+            <div>{this.props.name}</div>
           </div>
         </OverlayView>
       );
