@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SimpleMapExample from '../containers/google_map';
 import SelectBar from '../containers/select_bar';
 import {fetchUsersData} from '../actions/index';
+import {fetchTaxiLocation} from '../actions/index';
 import {connect} from 'react-redux';
 
 
@@ -20,6 +21,7 @@ class App extends Component {
     });
 
     this.props.fetchUsersData();
+    this.props.fetchTaxiLocation();
 
 
   }
@@ -42,4 +44,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, {fetchUsersData})(App);
+export default connect(null, {fetchUsersData, fetchTaxiLocation})(App);

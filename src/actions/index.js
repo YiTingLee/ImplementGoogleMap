@@ -6,25 +6,34 @@ export const FETCH_TAXI_LOCATION = 'fetch_taxi_location';
 export const FETCH_DIRECTIONS = 'fetch_directions';
 export const FETCH_USERS_DATA = 'fetch_users_data';
 
-export function fetchTaxiLocation(locationName){
-  var taxiInfo;
-  switch (locationName) {
-    case "ntut":
-      taxiInfo = driversLocation.ntut;
-      break;
-    case "station":
-      taxiInfo = driversLocation.station;
-      break;
-    case "taipei101":
-      taxiInfo = driversLocation.taipei101;
-      break;
-    default:
-      taxiInfo = driversLocation.error;
-  }
+export function fetchTaxiLocation(){
+  const url = `http://localhost:3000/taxiRESTfulAPI/public/main/taxis/api/getdata`;
+  const taxiInfo = axios.get(url);
+  console.log('axios:', taxiInfo);
+
   return {
     type:FETCH_TAXI_LOCATION,
     payload:taxiInfo
-  };
+  }
+
+  // var taxiInfo;
+  // switch (locationName) {
+  //   case "ntut":
+  //     taxiInfo = driversLocation.ntut;
+  //     break;
+  //   case "station":
+  //     taxiInfo = driversLocation.station;
+  //     break;
+  //   case "taipei101":
+  //     taxiInfo = driversLocation.taipei101;
+  //     break;
+  //   default:
+  //     taxiInfo = driversLocation.error;
+  // }
+  // return {
+  //   type:FETCH_TAXI_LOCATION,
+  //   payload:taxiInfo
+  // };
 }
 
 export function fetchDirecions(dlat,dlng,olat,olng){

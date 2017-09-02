@@ -31,18 +31,34 @@ class SimpleMapExample extends Component {
 
 
   renderMarkers(){
-    return _.map(this.props.taxiInfo,(driver) => {
-      // console.log("DriverMapping:",driver);
-      return(
-        <TaxiMarker
-          key = {driver.DriverId}
-          name = {driver.DriverName}
-          lat = {driver.latitude}
-          lng = {driver.longitude}
-          flag = {1}
-        />
-      );
-    });
+    try{
+      return this.props.taxiInfo.taxiInfo.data.map((data)=>{
+        return(
+          <TaxiMarker
+            key = {data.id}
+            name = {data.name}
+            lat = {data.lat}
+            lng = {data.lng}
+            flag = {1}
+          />
+        );
+      });
+    }catch(err){
+      // console.log("err:", err);
+    }
+
+    // return _.map(this.props.taxiInfo,(driver) => {
+    //   // console.log("DriverMapping:",driver);
+    //   return(
+    //     <TaxiMarker
+    //       key = {driver.DriverId}
+    //       name = {driver.DriverName}
+    //       lat = {driver.latitude}
+    //       lng = {driver.longitude}
+    //       flag = {1}
+    //     />
+    //   );
+    // });
   }
 
   renderUserMarkers(){
@@ -89,7 +105,7 @@ class SimpleMapExample extends Component {
 }
 
 function mapStateToProps(state){
-  return {taxiInfo : state.taxiInfo.taxiInfo,route : state.directions.directions, users : state.usersdata};
+  return {taxiInfo : state.taxiInfo,route : state.directions.directions, users : state.usersdata};
 }
 
 export default connect(mapStateToProps)(SimpleMapExample);

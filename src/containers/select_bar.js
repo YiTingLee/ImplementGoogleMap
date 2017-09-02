@@ -13,7 +13,7 @@ class SelectBar extends Component{
 
   onSelectChange(event){
     // console.log(event.target.value);
-    this.props.fetchTaxiLocation(event.target.value);
+    // this.props.fetchTaxiLocation(event.target.value);
 
     var olat,olng;
     switch (event.target.value) {
